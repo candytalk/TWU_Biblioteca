@@ -1,5 +1,7 @@
+classes
 .DS_Store
 build
 .gradle
 *.iml
 .idea
+.class
