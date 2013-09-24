@@ -1,8 +1,6 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Library {
     private List<Book> books = new ArrayList<Book>();
@@ -39,9 +37,11 @@ public class Library {
 
     private List<Book> countBookWithSomeRules(Book book) {
         List<Book> booksWithRules = new ArrayList<Book>();
+        Book bookInLib;
         for (Iterator<Book> i = books.iterator(); i.hasNext(); ) {
-            Book bookInLib = i.next();
+            bookInLib = i.next();
 
+            //dirty code to do the search
             if (
                     (bookInLib.getAuthor().equals(book.getAuthor()) || book.getAuthor().equals(""))
                             && (bookInLib.getName().equals(book.getName()) || book.getName().equals(""))
@@ -52,4 +52,15 @@ public class Library {
 
     }
 
+    public Map<String,Integer> listBooks() {
+        Book bookInLib;
+        Map<String, Integer> bookListMap = new HashMap<String, Integer>();
+        for (Iterator<Book> i = books.iterator(); i.hasNext(); ) {
+            bookInLib = i.next();
+            String bookToString = bookInLib.toString();
+            if (!bookListMap.containsKey(bookToString)) bookListMap.put(bookToString,1);
+            else bookListMap.put(bookToString,bookListMap.get(bookToString)+1);
+        }
+        return bookListMap;
+    }
 }

@@ -3,6 +3,15 @@ package com.twu.biblioteca;
 public class Book {
     private String name = "";
     private String author = "";
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "author='" + author + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     private boolean reserved = false;
 
     public String getName() {

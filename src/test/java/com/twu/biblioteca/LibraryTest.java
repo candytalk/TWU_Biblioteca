@@ -49,10 +49,28 @@ public class LibraryTest {
         assertThat(library.countBook(book2), is(2));
         assertThat(library.countBookWithAuthor("zhihao"), is(1));
         assertThat(library.countBookWithName("zhbook"), is(1));
-
-
-
     }
 
+    @Test
+    public void list_book_api() throws Exception {
+        Book book1 = new Book();
+        Book book2 = new Book();
+        Book book3 = new Book();
 
+        //book1
+        book1.setAuthor("author").setName("name");
+        //book2 are same to book1
+        book2.setAuthor("author").setName("name");
+        //book3
+        book3.setAuthor("zhihao").setName("zhbook");
+
+        //when add three books
+        library.addBook(book).addBook(book2).addBook(book3);
+
+        //book1 and book2 belong to same kind which counts 2:
+        assertThat(library.listBooks().get(book1.toString()),is(2));
+        //two kinds books:
+        assertThat(library.listBooks().size(),is(2));
+
+    }
 }

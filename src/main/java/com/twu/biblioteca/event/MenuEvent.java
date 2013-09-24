@@ -11,10 +11,6 @@ public class MenuEvent implements Event {
     private Event nextEvent = null;
     private Message messageAfterExecute = new NullMessage();
 
-    public void setIOHandler(IOHandler ioHandler) {
-        this.ioHandler = ioHandler;
-    }
-
     @Override
     public Message messageBeforeExecute() {
         return new MenuMessage();  //To change body of implemented methods use File | Settings | File Templates.
@@ -35,11 +31,11 @@ public class MenuEvent implements Event {
         String instructions = ioHandler.scanInput().returnInput();
 
         if (instructions.equals("1")) {
-            nextEvent = new ListBookEvent();
+            nextEvent = new SearchBookEvent();
         } else if (instructions.equals("2")) {
             nextEvent = new ReserveBookEvent();
         } else if (instructions.equals("3")) {
-            nextEvent = new CheckMembershipEvent();
+            nextEvent = new MenuEvent();
         } else {
             nextEvent = this;
             messageAfterExecute = new InputInvalidMessage();
