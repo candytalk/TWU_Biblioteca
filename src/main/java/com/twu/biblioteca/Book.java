@@ -1,9 +1,9 @@
 package com.twu.biblioteca;
 
 public class Book {
-    private String name;
-    private String author;
-    private boolean reserved;
+    private String name = "";
+    private String author = "";
+    private boolean reserved = false;
 
     public String getName() {
         return name;
@@ -31,8 +31,8 @@ public class Book {
     }
 
     @Override
-    public int hashCode(){
-        return (name+author).hashCode();
+    public int hashCode() {
+        return (name + author).hashCode();
     }
 
     public Book reserved() {
