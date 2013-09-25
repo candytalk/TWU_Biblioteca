@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -52,7 +53,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void list_book_api() throws Exception {
+    public void list_total_book_api() throws Exception {
         Book book1 = new Book();
         Book book2 = new Book();
         Book book3 = new Book();
@@ -68,9 +69,59 @@ public class LibraryTest {
         library.addBook(book).addBook(book2).addBook(book3);
 
         //book1 and book2 belong to same kind which counts 2:
-        assertThat(library.listBooks().get(book1.toString()),is(2));
+        assertThat(library.listTotalBooks().get(book1.toString()), is(2));
         //two kinds books:
-        assertThat(library.listBooks().size(),is(2));
+        assertThat(library.listTotalBooks().size(), is(2));
 
+    }
+
+    @Test
+    public void list_available_book_api() throws Exception {
+        Book book1 = new Book();
+        Book book2 = new Book();
+        Book book3 = new Book();
+
+        //book1
+        book1.setAuthor("author").setName("name");
+        //book2 are same to book1 but reserved
+        book2.setAuthor("author").setName("name").reserved();
+        //book3
+        book3.setAuthor("zhihao").setName("zhbook").reserved();
+        //when add three books
+        library.addBook(book1).addBook(book2).addBook(book3);
+
+        assertThat(library.listAvailableBooks().size(), is(1));
+        assertThat(library.listAvailableBooks().get(book1.toString()), is(1));
+
+    }
+
+    @Test
+    public void reserve_book_api() throws Exception {
+        Book book1 = new Book();
+        Book book2 = new Book();
+        Book book3 = new Book();
+
+        //book1
+        book1.setAuthor("author").setName("name");
+        //book2 are same to book1 but reserved
+        book2.setAuthor("author").setName("name");
+        //book3
+        book3.setAuthor("zhihao").setName("zhbook");
+        //when add three books
+        library.addBook(book1).addBook(book2).addBook(book3);
+
+        //we have two this kind(the book with name:"name" and author: "author")book,
+        //so we can reserve this kind of book twice:
+        assertTrue(library.reserveBook(new Book().setAuthor("author").setName("name")));
+        assertTrue(library.reserveBook(new Book().setAuthor("author").setName("name")));
+        //but NOT three times:
+        assertFalse(library.reserveBook(new Book().setAuthor("author").setName("name")));
+
+        //we have 1 this kind book:
+        assertTrue(library.reserveBook(new Book().setAuthor("zhihao").setName("zhbook")));
+        assertFalse(library.reserveBook(new Book().setAuthor("zhihao").setName("zhbook")));
+
+        //we don't have this kind book:
+        assertFalse(library.reserveBook(new Book().setAuthor("xxx").setName("zhbook")));
     }
 }
