@@ -37,6 +37,7 @@ public class Library {
 
     private List<Book> filterBookWithSomeRules(Book book) {
         List<Book> booksWithRules = new ArrayList<Book>();
+        if (book.isEmpty()) return booksWithRules;
         Book bookInLib;
         for (Iterator<Book> i = books.iterator(); i.hasNext(); ) {
             bookInLib = i.next();
@@ -77,7 +78,7 @@ public class Library {
         return bookListMap;
     }
 
-    public Map<String, Integer> listAvailableBooks() {
+    public Map<String, Integer> listUnreservedBooks() {
         Book bookInLib;
         Map<String, Integer> bookListMap = new HashMap<String, Integer>();
         for (Iterator<Book> i = books.iterator(); i.hasNext(); ) {

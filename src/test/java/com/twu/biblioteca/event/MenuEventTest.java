@@ -1,9 +1,11 @@
 package com.twu.biblioteca.event;
 
 import com.twu.biblioteca.IOTools;
-import com.twu.biblioteca.message.InputInvalidMessage;
-import com.twu.biblioteca.message.MenuMessage;
+import com.twu.biblioteca.Library;
+import com.twu.biblioteca.message.InvalidOrErrorMessage;
 import com.twu.biblioteca.message.Message;
+import com.twu.biblioteca.message.NullMessage;
+import com.twu.biblioteca.message.TipMessage;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +16,7 @@ public class MenuEventTest {
 
     @Before
     public void setUp() throws Exception {
-        menuEvent = new MenuEvent();
+        menuEvent = new MenuEvent(new Library());
     }
 
     @Test
@@ -24,13 +26,15 @@ public class MenuEventTest {
         menuEvent.execute();
 
         //then
-        assertTrue(menuEvent.messageAfterExecute() instanceof InputInvalidMessage);
+        assertTrue(menuEvent.messageAfterExecute() instanceof InvalidOrErrorMessage);
         assertTrue(menuEvent.nextEvent() instanceof MenuEvent);
     }
 
     @Test
     public void menu_should_show_menu_message() throws Exception {
-        Message msg = menuEvent.messageBeforeExecute();
-        assertTrue(msg instanceof MenuMessage);
+        IOTools.InputFromString("1");
+        menuEvent.execute();
+        Message msg = menuEvent.messageAfterExecute();
+        assertTrue(msg instanceof NullMessage);
     }
 }

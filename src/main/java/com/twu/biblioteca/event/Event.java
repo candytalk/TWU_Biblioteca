@@ -7,5 +7,4 @@ public interface Event {
     public Message messageAfterExecute();
     public Event nextEvent();
     public Event execute();
-
 }

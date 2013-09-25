@@ -7,11 +7,12 @@ import com.twu.biblioteca.message.TipMessage;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 public class ListBookEventTest {
-    ListBookEvent listBookEvent = new ListBookEvent();
     Library library = new Library();
+    ListBookEvent listBookEvent = new ListBookEvent(library);
 
     @Before
     public void setUp() throws Exception {
@@ -20,7 +21,7 @@ public class ListBookEventTest {
         Book book3 = new Book();
 
         //book1
-        book1.setAuthor("author").setName("name");
+        book1.setAuthor("author").setName("name").reserved();
         //book2 are same to book1
         book2.setAuthor("author").setName("name");
         //book3
@@ -30,12 +31,14 @@ public class ListBookEventTest {
     }
 
     @Test
-    public void list_book_event_will_give_tip_message_as_messageBeforeExecute() throws Exception {
-        listBookEvent.setLibrary(library);
-        Message message = listBookEvent.messageBeforeExecute();
+    public void list_book_event_will_give_tip_message_as_execute() throws Exception {
+        listBookEvent.execute();
+        Message message = listBookEvent.messageAfterExecute();
         assertTrue(message instanceof TipMessage);
+        assertEquals(message.getMsg(), "Book and counts:\r\n" +
+                "Book info: Book{author='zhihao', name='zhbook'} total: 1 available: 1\r\n" +
+                "Book info: Book{author='author', name='name'} total: 2 available: 1\r\n");
     }
-
 
 
 }

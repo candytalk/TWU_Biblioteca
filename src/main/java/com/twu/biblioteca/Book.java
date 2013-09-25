@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 public class Book {
     private String name = "";
     private String author = "";
+    private boolean reserved = false;
 
     @Override
     public String toString() {
@@ -11,8 +12,6 @@ public class Book {
                 ", name='" + name + '\'' +
                 '}';
     }
-
-    private boolean reserved = false;
 
     public String getName() {
         return name;
@@ -56,5 +55,9 @@ public class Book {
     public Book unreserved() {
         reserved = false;
         return this;
+    }
+
+    public boolean isEmpty() {
+        return author.isEmpty() && name.isEmpty();
     }
 }

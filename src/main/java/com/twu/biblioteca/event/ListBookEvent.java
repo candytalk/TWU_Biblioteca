@@ -1,9 +1,8 @@
 package com.twu.biblioteca.event;
 
-import com.twu.biblioteca.IOHandler;
 import com.twu.biblioteca.Library;
-import com.twu.biblioteca.message.InputInvalidMessage;
 import com.twu.biblioteca.message.Message;
+import com.twu.biblioteca.message.NullMessage;
 import com.twu.biblioteca.message.TipMessage;
 
 import java.util.Iterator;
@@ -11,56 +10,46 @@ import java.util.Map;
 
 public class ListBookEvent implements Event {
     private Library library;
-    private IOHandler ioHandler = new IOHandler();
     private Event nextEvent;
-    private InputInvalidMessage messageAfterExecute;
+    private Message messageAfterExecute;
 
-    public void setLibrary(Library library) {
+    public ListBookEvent(Library library) {
         this.library = library;
     }
 
     @Override
     public Message messageBeforeExecute() {
-        Map<String, Integer> bookListMap = library.listBooks();
-        String results = "Book and counts:\r\n";
-        for (Iterator<String> i = bookListMap.keySet().iterator(); i.hasNext(); ) {
-            String book = i.next();
-            results += book + "  :  " + bookListMap.get(book) + "\r\n";
-        }
-        results += "press number: \r\n" +
-                "1: List books\r\n" +
-                "2: Reserve book\r\n" +
-                "0: back to Menu.";
-        return new TipMessage(results);
+        return new NullMessage();
     }
 
     @Override
     public Message messageAfterExecute() {
-        return new TipMessage("press number: \r\n" +
-                "1: List books\r\n" +
-                "2: Reserve book\r\n" +
-                "0: back to Menu.");
+        return messageAfterExecute;
     }
 
     @Override
     public Event nextEvent() {
-        return nextEvent();
+        return nextEvent;
     }
 
     @Override
     public Event execute() {
-        String instructions = ioHandler.scanInput().returnInput();
+        Map<String, Integer> bookListMap = library.listTotalBooks();
+        String results = "Book and counts:\r\n";
+        for (Iterator<String> i = bookListMap.keySet().iterator(); i.hasNext(); ) {
+            String book = i.next();
 
-        if (instructions.equals("1")) {
-            nextEvent = new ListBookEvent();
-        } else if (instructions.equals("2")) {
-            nextEvent = new ReserveBookEvent();
-        } else if (instructions.equals("0")) {
-            nextEvent = new MenuEvent();
-        } else {
-            nextEvent = this;
-            messageAfterExecute = new InputInvalidMessage();
+
+            results += "Book info: " + book + " total: " + bookListMap.get(book) + " available: "
+                    + countUnreservedBook(book) + "\r\n";
         }
+        messageAfterExecute = new TipMessage(results);
+        nextEvent = new MenuEvent(library);
         return this;
     }
+
+    private Integer countUnreservedBook(String book_to_string) {
+        return library.listUnreservedBooks().get(book_to_string) != null ? library.listUnreservedBooks().get(book_to_string) : 0;
+    }
+
 }

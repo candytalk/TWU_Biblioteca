@@ -9,6 +9,6 @@ public class TipMessage implements Message {
 
     @Override
     public String getMsg() {
-        return tip;  //To change body of implemented methods use File | Settings | File Templates.
+        return tip;
     }
 }

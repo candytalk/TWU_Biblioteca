@@ -1,19 +1,27 @@
 package com.twu.biblioteca.event;
 
 import com.twu.biblioteca.IOHandler;
-import com.twu.biblioteca.message.InputInvalidMessage;
-import com.twu.biblioteca.message.MenuMessage;
+import com.twu.biblioteca.Library;
+import com.twu.biblioteca.message.InvalidOrErrorMessage;
 import com.twu.biblioteca.message.Message;
 import com.twu.biblioteca.message.NullMessage;
+import com.twu.biblioteca.message.TipMessage;
 
 public class MenuEvent implements Event {
+    private final Library library;
     private IOHandler ioHandler = new IOHandler();
-    private Event nextEvent = null;
+    private Event nextEvent;
     private Message messageAfterExecute = new NullMessage();
+
+    public MenuEvent(Library library) {
+        this.library = library;
+    }
 
     @Override
     public Message messageBeforeExecute() {
-        return new MenuMessage();  //To change body of implemented methods use File | Settings | File Templates.
+        return new TipMessage("1). list books\n"
+                + "2). reserve a book\n"
+                + "3). check their membership details\n");
     }
 
     @Override
@@ -31,14 +39,14 @@ public class MenuEvent implements Event {
         String instructions = ioHandler.scanInput().returnInput();
 
         if (instructions.equals("1")) {
-            nextEvent = new SearchBookEvent();
+            nextEvent = new ListBookEvent(library);
         } else if (instructions.equals("2")) {
-            nextEvent = new ReserveBookEvent();
+            nextEvent = new ReserveBookEvent(library);
         } else if (instructions.equals("3")) {
-            nextEvent = new MenuEvent();
+            nextEvent = new CheckMembershipEvent(library);
         } else {
             nextEvent = this;
-            messageAfterExecute = new InputInvalidMessage();
+            messageAfterExecute = new InvalidOrErrorMessage("please input correct option");
         }
         return this;
     }

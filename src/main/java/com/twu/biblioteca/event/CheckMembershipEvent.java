@@ -1,25 +1,34 @@
 package com.twu.biblioteca.event;
 
+import com.twu.biblioteca.Library;
 import com.twu.biblioteca.message.Message;
+import com.twu.biblioteca.message.NullMessage;
+import com.twu.biblioteca.message.TipMessage;
 
 public class CheckMembershipEvent implements Event {
+    private Library library;
+
+    public CheckMembershipEvent(Library library) {
+        this.library = library;
+    }
+
     @Override
     public Message messageBeforeExecute() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return new NullMessage();
     }
 
     @Override
     public Message messageAfterExecute() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return new TipMessage("go to find laomao");
     }
 
     @Override
     public Event nextEvent() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return new MenuEvent(library);
     }
 
     @Override
     public Event execute() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return this;
     }
 }

@@ -90,8 +90,8 @@ public class LibraryTest {
         //when add three books
         library.addBook(book1).addBook(book2).addBook(book3);
 
-        assertThat(library.listAvailableBooks().size(), is(1));
-        assertThat(library.listAvailableBooks().get(book1.toString()), is(1));
+        assertThat(library.listUnreservedBooks().size(), is(1));
+        assertThat(library.listUnreservedBooks().get(book1.toString()), is(1));
 
     }
 
