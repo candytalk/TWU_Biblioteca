@@ -35,18 +35,21 @@ public class Library {
 
     }
 
+    private boolean haveSameAuthorOrNoAuthor(Book book1, Book book2) {
+        return book1.getAuthor().equals(book2.getAuthor()) || book2.getAuthor().equals("");
+    }
+
+    private boolean haveSameNameOrNoName(Book book1, Book book2) {
+        return book1.getName().equals(book2.getName()) || book2.getName().equals("");
+    }
+
     private List<Book> filterBookWithSomeRules(Book book) {
         List<Book> booksWithRules = new ArrayList<Book>();
         if (book.isEmpty()) return booksWithRules;
         Book bookInLib;
         for (Iterator<Book> i = books.iterator(); i.hasNext(); ) {
             bookInLib = i.next();
-
-            //dirty code to do the search
-            if (
-                    (bookInLib.getAuthor().equals(book.getAuthor()) || book.getAuthor().equals(""))
-                            && (bookInLib.getName().equals(book.getName()) || book.getName().equals(""))
-                    )
+            if (haveSameAuthorOrNoAuthor(bookInLib, book) && haveSameNameOrNoName(bookInLib, book))
                 booksWithRules.add(bookInLib);
         }
         return booksWithRules;
@@ -58,8 +61,8 @@ public class Library {
         Book bookInSuitableBooks;
         for (Iterator<Book> i = suitableBooks.iterator(); i.hasNext(); ) {
             bookInSuitableBooks = i.next();
-            if(!bookInSuitableBooks.isReserved()){
-                bookInSuitableBooks.reserved();
+            if (!bookInSuitableBooks.isReserved()) {
+                bookInSuitableBooks.reserve();
                 return true;
             }
         }

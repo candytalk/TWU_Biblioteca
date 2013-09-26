@@ -31,4 +31,9 @@ public class CheckMembershipEvent implements Event {
     public Event execute() {
         return this;
     }
+
+    @Override
+    public Library getLibrary() {
+        return library;
+    }
 }

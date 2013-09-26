@@ -8,13 +8,19 @@ import com.twu.biblioteca.message.NullMessage;
 import com.twu.biblioteca.message.TipMessage;
 
 public class MenuEvent implements Event {
-    private final Library library;
-    private IOHandler ioHandler = new IOHandler();
+    private Library library;
+    private IOHandler ioHandler;
     private Event nextEvent;
     private Message messageAfterExecute = new NullMessage();
 
     public MenuEvent(Library library) {
         this.library = library;
+        this.ioHandler = new IOHandler(this);
+
+    }
+
+    public Library getLibrary() {
+        return library;
     }
 
     @Override
@@ -37,18 +43,8 @@ public class MenuEvent implements Event {
 
     @Override
     public Event execute() {
-        String instructions = ioHandler.scanInput().returnInput();
-
-        if (instructions.equals("1")) {
-            nextEvent = new ListBookEvent(library);
-        } else if (instructions.equals("2")) {
-            nextEvent = new ReserveBookEvent(library);
-        } else if (instructions.equals("3")) {
-            nextEvent = new CheckMembershipEvent(library);
-        } else if (instructions.equals("q")) {
-            nextEvent = new QuitEvent();
-        } else {
-            nextEvent = this;
+        nextEvent = ioHandler.scanInput().handleOptionRouter();
+        if (nextEvent instanceof MenuEvent) {
             messageAfterExecute = new InvalidOrErrorMessage("please input correct option");
         }
         return this;

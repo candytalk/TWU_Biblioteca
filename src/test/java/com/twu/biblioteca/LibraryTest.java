@@ -83,10 +83,10 @@ public class LibraryTest {
 
         //book1
         book1.setAuthor("author").setName("name");
-        //book2 are same to book1 but reserved
-        book2.setAuthor("author").setName("name").reserved();
+        //book2 are same to book1 but reserve
+        book2.setAuthor("author").setName("name").reserve();
         //book3
-        book3.setAuthor("zhihao").setName("zhbook").reserved();
+        book3.setAuthor("zhihao").setName("zhbook").reserve();
         //when add three books
         library.addBook(book1).addBook(book2).addBook(book3);
 
@@ -103,7 +103,7 @@ public class LibraryTest {
 
         //book1
         book1.setAuthor("author").setName("name");
-        //book2 are same to book1 but reserved
+        //book2 are same to book1 but reserve
         book2.setAuthor("author").setName("name");
         //book3
         book3.setAuthor("zhihao").setName("zhbook");

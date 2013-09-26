@@ -17,6 +17,10 @@ public class ListBookEvent implements Event {
         this.library = library;
     }
 
+    public Library getLibrary() {
+        return library;
+    }
+
     @Override
     public Message messageBeforeExecute() {
         return new NullMessage();
@@ -37,11 +41,10 @@ public class ListBookEvent implements Event {
         Map<String, Integer> bookListMap = library.listTotalBooks();
         String results = "Book and counts:\r\n";
         for (Iterator<String> i = bookListMap.keySet().iterator(); i.hasNext(); ) {
-            String book = i.next();
-
-
-            results += "Book info: " + book + " total: " + bookListMap.get(book) + " available: "
-                    + countUnreservedBook(book) + "\r\n";
+            String book_as_string = i.next();
+            results += "Book info: " + book_as_string
+                    + " total: " + bookListMap.get(book_as_string)
+                    + " available: " + countUnreservedBook(book_as_string) + "\r\n";
         }
         messageAfterExecute = new TipMessage(results);
         nextEvent = new MenuEvent(library);

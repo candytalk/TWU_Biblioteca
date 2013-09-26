@@ -17,9 +17,13 @@ public class ReserveBookEvent implements Event {
         this.library = library;
     }
 
+    public Library getLibrary() {
+        return library;
+    }
+
     @Override
     public Message messageBeforeExecute() {
-        return new TipMessage("Please input the book you want to reserved as this format:\r\n" +
+        return new TipMessage("Please input the book you want to reserve as this format:\r\n" +
                 "name,author\r\n");
     }
 

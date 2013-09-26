@@ -21,7 +21,7 @@ public class ListBookEventTest {
         Book book3 = new Book();
 
         //book1
-        book1.setAuthor("author").setName("name").reserved();
+        book1.setAuthor("author").setName("name").reserve();
         //book2 are same to book1
         book2.setAuthor("author").setName("name");
         //book3

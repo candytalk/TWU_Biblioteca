@@ -43,7 +43,7 @@ public class Book {
         return (name + author).hashCode();
     }
 
-    public Book reserved() {
+    public Book reserve() {
         reserved = true;
         return this;
     }
@@ -52,7 +52,7 @@ public class Book {
         return reserved;
     }
 
-    public Book unreserved() {
+    public Book unReserve() {
         reserved = false;
         return this;
     }

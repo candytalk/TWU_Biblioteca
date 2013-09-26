@@ -52,7 +52,7 @@ public class BookTest {
     @Test
     public void book_can_be_reserved() throws Exception {
         //when
-        book.reserved();
+        book.reserve();
 
         //then
         assertTrue(book.isReserved());
@@ -61,7 +61,7 @@ public class BookTest {
     @Test
     public void book_can_be_unreserved() throws Exception {
         //when
-        book.reserved().unreserved();
+        book.reserve().unReserve();
 
         //then
         assertFalse(book.isReserved());
