@@ -5,10 +5,10 @@ import com.twu.biblioteca.event.MenuEvent;
 
 public class Biblioteca {
     public static void main(String[] args) {
-        execute(setUpInitialEvent());
+        executeEvent(setUpInitialEvent());
     }
 
-    static private void execute(Event beginEvent) {
+    static private void executeEvent(Event beginEvent) {
         while (null != beginEvent) {
             beginEvent.messageBeforeExecute().showMsg();
             beginEvent.execute();
