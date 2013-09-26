@@ -21,9 +21,9 @@ public class Biblioteca {
         Event event = new MenuEvent(library);
 
         while (null != event) {
-            System.out.println(event.messageBeforeExecute().getMsg());
+            event.messageBeforeExecute().showMsg();
             event.execute();
-            System.out.println(event.messageAfterExecute().getMsg());
+            event.messageAfterExecute().showMsg();
             event = event.nextEvent();
         }
     }

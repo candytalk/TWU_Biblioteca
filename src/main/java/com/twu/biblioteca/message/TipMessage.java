@@ -11,4 +11,9 @@ public class TipMessage implements Message {
     public String getMsg() {
         return tip;
     }
+
+    @Override
+    public void showMsg() {
+        System.out.println(getMsg());
+    }
 }

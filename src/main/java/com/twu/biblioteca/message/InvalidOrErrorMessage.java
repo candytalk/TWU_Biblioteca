@@ -12,6 +12,11 @@ public class InvalidOrErrorMessage implements Message {
     }
 
     @Override
+    public void showMsg() {
+        System.out.println(getMsg());
+    }
+
+    @Override
     public String getMsg() {
         return msg;
     }

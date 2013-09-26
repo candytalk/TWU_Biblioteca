@@ -19,9 +19,10 @@ public class MenuEvent implements Event {
 
     @Override
     public Message messageBeforeExecute() {
-        return new TipMessage("1). list books\n"
-                + "2). reserve a book\n"
-                + "3). check their membership details\n");
+        return new TipMessage("1). list books\r\n"
+                + "2). reserve a book\r\n"
+                + "3). check their membership details\r\n" +
+                "q.  quit");
     }
 
     @Override
@@ -44,6 +45,8 @@ public class MenuEvent implements Event {
             nextEvent = new ReserveBookEvent(library);
         } else if (instructions.equals("3")) {
             nextEvent = new CheckMembershipEvent(library);
+        } else if (instructions.equals("q")) {
+            nextEvent = new QuitEvent();
         } else {
             nextEvent = this;
             messageAfterExecute = new InvalidOrErrorMessage("please input correct option");

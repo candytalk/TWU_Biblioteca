@@ -5,4 +5,9 @@ public class NullMessage implements Message{
     public String getMsg() {
         return "";
     }
+
+    @Override
+    public void showMsg() {
+        System.out.println(getMsg());
+    }
 }
