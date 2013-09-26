@@ -19,8 +19,6 @@ public class MenuEvent implements Event {
 
     }
 
-
-
     @Override
     public Message messageBeforeExecute() {
         return new TipMessage("1). list books\r\n"
