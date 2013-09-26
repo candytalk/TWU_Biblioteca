@@ -69,7 +69,7 @@ public class Library {
         return false;
     }
 
-    public Map<String, Integer> listTotalBooks() {
+    public Map<String, Integer> listBooksCategoryAndCounts() {
         Book bookInLib;
         Map<String, Integer> bookListMap = new HashMap<String, Integer>();
         for (Iterator<Book> i = books.iterator(); i.hasNext(); ) {
@@ -81,7 +81,7 @@ public class Library {
         return bookListMap;
     }
 
-    public Map<String, Integer> listUnreservedBooks() {
+    public Map<String, Integer> listBooksCategoryAndUnreservedCounts() {
         Book bookInLib;
         Map<String, Integer> bookListMap = new HashMap<String, Integer>();
         for (Iterator<Book> i = books.iterator(); i.hasNext(); ) {

@@ -38,21 +38,21 @@ public class ListBookEvent implements Event {
 
     @Override
     public Event execute() {
-        Map<String, Integer> bookListMap = library.listTotalBooks();
+        Map<String, Integer> bookListMap = library.listBooksCategoryAndCounts();
         String results = "Book and counts:\r\n";
         for (Iterator<String> i = bookListMap.keySet().iterator(); i.hasNext(); ) {
-            String book_as_string = i.next();
-            results += "Book info: " + book_as_string
-                    + " total: " + bookListMap.get(book_as_string)
-                    + " available: " + countUnreservedBook(book_as_string) + "\r\n";
+            String bookCategory = i.next();
+            results += "Book info: " + bookCategory
+                    + " total: " + bookListMap.get(bookCategory)
+                    + " available: " + countUnreservedBook(bookCategory) + "\r\n";
         }
         messageAfterExecute = new TipMessage(results);
         nextEvent = new MenuEvent(library);
         return this;
     }
 
-    private Integer countUnreservedBook(String book_to_string) {
-        return library.listUnreservedBooks().get(book_to_string) != null ? library.listUnreservedBooks().get(book_to_string) : 0;
+    private Integer countUnreservedBook(String bookCategory) {
+        return library.listBooksCategoryAndUnreservedCounts().get(bookCategory) != null ? library.listBooksCategoryAndUnreservedCounts().get(bookCategory) : 0;
     }
 
 }

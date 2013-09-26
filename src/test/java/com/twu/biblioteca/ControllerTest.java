@@ -10,8 +10,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class IOHandlerTest {
-    IOHandler iohandler = new IOHandler();
+public class ControllerTest {
+    Controller iohandler = new Controller();
 
     @Before
     public void setUp() throws Exception {
@@ -23,7 +23,7 @@ public class IOHandlerTest {
         //set up
         Library library = new Library();
         Event menuEvent = new MenuEvent(library);
-        iohandler = new IOHandler(menuEvent);
+        iohandler = new Controller(menuEvent);
 
         //when input "1" under menuEvent
         IOTools.InputFromString("1");
@@ -38,7 +38,7 @@ public class IOHandlerTest {
         //set up
         Library library = new Library();
         Event menuEvent = new MenuEvent(library);
-        iohandler = new IOHandler(menuEvent);
+        iohandler = new Controller(menuEvent);
 
         //when input "1" under menuEvent
         IOTools.InputFromString("4");

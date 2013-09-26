@@ -69,9 +69,9 @@ public class LibraryTest {
         library.addBook(book).addBook(book2).addBook(book3);
 
         //book1 and book2 belong to same kind which counts 2:
-        assertThat(library.listTotalBooks().get(book1.toString()), is(2));
+        assertThat(library.listBooksCategoryAndCounts().get(book1.toString()), is(2));
         //two kinds books:
-        assertThat(library.listTotalBooks().size(), is(2));
+        assertThat(library.listBooksCategoryAndCounts().size(), is(2));
 
     }
 
@@ -90,8 +90,8 @@ public class LibraryTest {
         //when add three books
         library.addBook(book1).addBook(book2).addBook(book3);
 
-        assertThat(library.listUnreservedBooks().size(), is(1));
-        assertThat(library.listUnreservedBooks().get(book1.toString()), is(1));
+        assertThat(library.listBooksCategoryAndUnreservedCounts().size(), is(1));
+        assertThat(library.listBooksCategoryAndUnreservedCounts().get(book1.toString()), is(1));
 
     }
 

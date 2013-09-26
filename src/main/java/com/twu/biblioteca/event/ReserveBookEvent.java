@@ -1,7 +1,7 @@
 package com.twu.biblioteca.event;
 
 import com.twu.biblioteca.Book;
-import com.twu.biblioteca.IOHandler;
+import com.twu.biblioteca.Controller;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.message.InvalidOrErrorMessage;
 import com.twu.biblioteca.message.Message;
@@ -9,7 +9,7 @@ import com.twu.biblioteca.message.TipMessage;
 
 public class ReserveBookEvent implements Event {
     private Library library;
-    private IOHandler ioHandler = new IOHandler();
+    private Controller controller = new Controller();
     private Event nextEvent;
     private Message messageAfterExecute;
 
@@ -52,7 +52,7 @@ public class ReserveBookEvent implements Event {
     }
 
     private Book createBookFromInput() {
-        String[] bookInfo = ioHandler.scanInput().returnInput().split(",");
+        String[] bookInfo = controller.scanInput().returnInput().split(",");
         Book book = new Book();
         String bookName = bookInfo[0].trim();
         book.setName(bookName);
