@@ -42,17 +42,16 @@ public class Controller {
     }
 
     private Event routerForMenu() {
-        Event nextEvent = routerMapForMenu(currentEvent).get(CurrentInput);
-        nextEvent = (nextEvent != null) ? nextEvent : new MenuEvent(currentEvent.getLibrary());
+        Event nextEvent = routerMapForMenu().get(CurrentInput);
+        nextEvent = (nextEvent != null) ? nextEvent : new MenuEvent();
         return nextEvent;
     }
 
-    private Map<String, Event> routerMapForMenu(Event currentEvent) {
-        Library library = currentEvent.getLibrary();
+    private Map<String, Event> routerMapForMenu() {
         routerMapForMenu.clear();
-        routerMapForMenu.put("1", new ListBookEvent(library));
-        routerMapForMenu.put("2", new ReserveBookEvent(library));
-        routerMapForMenu.put("3", new CheckMembershipEvent(library));
+        routerMapForMenu.put("1", new ListBookEvent());
+        routerMapForMenu.put("2", new ReserveBookEvent());
+        routerMapForMenu.put("3", new CheckMembershipEvent());
         routerMapForMenu.put("q", new QuitEvent());
         return routerMapForMenu;
     }

@@ -21,8 +21,7 @@ public class ControllerTest {
     @Test
     public void iohandler_could_handle_correct_input() throws Exception {
         //set up
-        Library library = new Library();
-        Event menuEvent = new MenuEvent(library);
+        Event menuEvent = new MenuEvent();
         iohandler = new Controller(menuEvent);
 
         //when input "1" under menuEvent
@@ -36,8 +35,7 @@ public class ControllerTest {
     @Test
     public void iohandler_could_handle_incorrect_input() throws Exception {
         //set up
-        Library library = new Library();
-        Event menuEvent = new MenuEvent(library);
+        Event menuEvent = new MenuEvent();
         iohandler = new Controller(menuEvent);
 
         //when input "1" under menuEvent
@@ -48,6 +46,7 @@ public class ControllerTest {
         assertTrue(menuEvent.nextEvent() instanceof MenuEvent);
         assertTrue(menuEvent.messageAfterExecute() instanceof InvalidOrErrorMessage);
     }
+
     @Test
     public void getKeyboardInput() throws Exception {
         //given system.in from string

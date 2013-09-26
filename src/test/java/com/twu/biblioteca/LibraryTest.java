@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,12 +10,19 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LibraryTest {
-    private Library library = new Library();
+    private Library library;
     private Book book = new Book();
+
+    @After
+    public void tearDown() throws Exception {
+        Library.reset();
+    }
 
     @Before
     public void setUp() throws Exception {
         book.setAuthor("author").setName("name");
+        Library.reset();
+        library = Library.instance();
     }
 
     @Test

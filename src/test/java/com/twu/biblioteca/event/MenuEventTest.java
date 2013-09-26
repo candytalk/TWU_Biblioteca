@@ -5,7 +5,7 @@ import com.twu.biblioteca.Library;
 import com.twu.biblioteca.message.InvalidOrErrorMessage;
 import com.twu.biblioteca.message.Message;
 import com.twu.biblioteca.message.NullMessage;
-import com.twu.biblioteca.message.TipMessage;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +16,11 @@ public class MenuEventTest {
 
     @Before
     public void setUp() throws Exception {
-        menuEvent = new MenuEvent(new Library());
+        menuEvent = new MenuEvent();
+    }
+    @After
+    public void tearDown() throws Exception {
+        Library.reset();
     }
 
     @Test

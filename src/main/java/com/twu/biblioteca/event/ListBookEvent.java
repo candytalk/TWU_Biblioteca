@@ -13,13 +13,11 @@ public class ListBookEvent implements Event {
     private Event nextEvent;
     private Message messageAfterExecute;
 
-    public ListBookEvent(Library library) {
-        this.library = library;
+    public ListBookEvent() {
+        this.library = Library.instance();
     }
 
-    public Library getLibrary() {
-        return library;
-    }
+
 
     @Override
     public Message messageBeforeExecute() {
@@ -47,7 +45,7 @@ public class ListBookEvent implements Event {
                     + " available: " + countUnreservedBook(bookCategory) + "\r\n";
         }
         messageAfterExecute = new TipMessage(results);
-        nextEvent = new MenuEvent(library);
+        nextEvent = new MenuEvent();
         return this;
     }
 

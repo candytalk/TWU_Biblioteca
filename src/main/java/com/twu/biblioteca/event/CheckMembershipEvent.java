@@ -1,15 +1,12 @@
 package com.twu.biblioteca.event;
 
-import com.twu.biblioteca.Library;
 import com.twu.biblioteca.message.Message;
 import com.twu.biblioteca.message.NullMessage;
 import com.twu.biblioteca.message.TipMessage;
 
 public class CheckMembershipEvent implements Event {
-    private Library library;
 
-    public CheckMembershipEvent(Library library) {
-        this.library = library;
+    public CheckMembershipEvent() {
     }
 
     @Override
@@ -24,7 +21,7 @@ public class CheckMembershipEvent implements Event {
 
     @Override
     public Event nextEvent() {
-        return new MenuEvent(library);
+        return new MenuEvent();
     }
 
     @Override
@@ -32,8 +29,5 @@ public class CheckMembershipEvent implements Event {
         return this;
     }
 
-    @Override
-    public Library getLibrary() {
-        return library;
-    }
+
 }

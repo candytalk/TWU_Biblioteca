@@ -25,8 +25,5 @@ public class QuitEvent implements Event{
         return this;
     }
 
-    @Override
-    public Library getLibrary() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 }

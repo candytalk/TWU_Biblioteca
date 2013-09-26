@@ -13,15 +13,13 @@ public class MenuEvent implements Event {
     private Event nextEvent;
     private Message messageAfterExecute = new NullMessage();
 
-    public MenuEvent(Library library) {
-        this.library = library;
+    public MenuEvent() {
+        this.library = Library.instance();
         this.controller = new Controller(this);
 
     }
 
-    public Library getLibrary() {
-        return library;
-    }
+
 
     @Override
     public Message messageBeforeExecute() {

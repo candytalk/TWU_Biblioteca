@@ -3,7 +3,21 @@ package com.twu.biblioteca;
 import java.util.*;
 
 public class Library {
+    static private Library instance = new Library();
     private List<Book> books = new ArrayList<Book>();
+
+    private Library() {
+    }
+
+    ;
+
+    public static void reset() {
+        instance = new Library();
+    }
+
+    public static Library instance() {
+        return instance;
+    }
 
     public Library addBook(Book book) {
         books.add(book);

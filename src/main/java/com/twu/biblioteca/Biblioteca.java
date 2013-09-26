@@ -5,10 +5,12 @@ import com.twu.biblioteca.event.MenuEvent;
 
 public class Biblioteca {
     public static void main(String[] args) {
-        executeEvent(setUpInitialEvent());
+        executeEvent();
     }
 
-    static private void executeEvent(Event beginEvent) {
+    static private void executeEvent() {
+        setUpInitialEvent();
+        Event beginEvent = new MenuEvent();
         while (null != beginEvent) {
             beginEvent.messageBeforeExecute().showMsg();
             beginEvent.execute();
@@ -17,8 +19,8 @@ public class Biblioteca {
         }
     }
 
-    static private Event setUpInitialEvent() {
-        Library library = new Library();
+    static private void setUpInitialEvent() {
+        Library library = Library.instance();
         Book book1 = new Book();
         Book book2 = new Book();
         Book book3 = new Book();
@@ -31,7 +33,6 @@ public class Biblioteca {
         book3.setAuthor("zhihao").setName("zhbook");
         library.addBook(book1).addBook(book2).addBook(book3);
 
-        return new MenuEvent(library);
 
     }
 

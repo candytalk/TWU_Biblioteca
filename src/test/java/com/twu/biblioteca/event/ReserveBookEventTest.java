@@ -5,19 +5,24 @@ import com.twu.biblioteca.IOTools;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.message.InvalidOrErrorMessage;
 import com.twu.biblioteca.message.TipMessage;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
 
 public class ReserveBookEventTest {
-    public Library library = new Library();
-    private ReserveBookEvent reserveBookEvent = new ReserveBookEvent(library);
+    public Library library = Library.instance();
+    private ReserveBookEvent reserveBookEvent = new ReserveBookEvent();
 
     @Before
     public void setUp() throws Exception {
         library.addBook(new Book().setName("book").setAuthor("zhihao"));
+    }
 
+    @After
+    public void tearDown() throws Exception {
+        Library.reset();
     }
 
     @Test

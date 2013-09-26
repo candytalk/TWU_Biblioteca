@@ -13,13 +13,10 @@ public class ReserveBookEvent implements Event {
     private Event nextEvent;
     private Message messageAfterExecute;
 
-    public ReserveBookEvent(Library library) {
-        this.library = library;
+    public ReserveBookEvent() {
+        this.library = Library.instance();
     }
 
-    public Library getLibrary() {
-        return library;
-    }
 
     @Override
     public Message messageBeforeExecute() {
@@ -42,12 +39,12 @@ public class ReserveBookEvent implements Event {
         Book book = createBookFromInput();
         if (!library.reserveBook(book)) {
             messageAfterExecute = new InvalidOrErrorMessage("can't reserve this kind of book, please check");
-            nextEvent = new MenuEvent(library);
+            nextEvent = new MenuEvent();
         } else {
             messageAfterExecute = new TipMessage("Succeed");
 
         }
-        nextEvent = new MenuEvent(library);
+        nextEvent = new MenuEvent();
         return this;
     }
 

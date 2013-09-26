@@ -4,6 +4,7 @@ import com.twu.biblioteca.Book;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.message.Message;
 import com.twu.biblioteca.message.TipMessage;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,11 +12,18 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 public class ListBookEventTest {
-    Library library = new Library();
-    ListBookEvent listBookEvent = new ListBookEvent(library);
+    Library library;
+    ListBookEvent listBookEvent = new ListBookEvent();
+
+    @After
+    public void tearDown() throws Exception {
+        Library.reset();
+    }
 
     @Before
     public void setUp() throws Exception {
+        library = Library.instance();
+        Library.reset();
         Book book1 = new Book();
         Book book2 = new Book();
         Book book3 = new Book();
